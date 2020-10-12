@@ -35,6 +35,7 @@
               <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal">
                 <i class="tim-icons icon-zoom-split"></i>
               </button>
+              
               <!-- You can choose types of search input -->
             </div>
             <modal :show.sync="searchModalVisible"
@@ -145,6 +146,31 @@
       },
       toggleMenu() {
         this.showMenu = !this.showMenu;
+      },
+       convert(str) {
+      var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+      return [date.getFullYear(), mnth, day].join("-");
+    } 
+    ,
+    time(){
+      var dateObj = new Date( new Date().getTime() + 7 * 3600 * 1000);
+var month = dateObj.getUTCMonth() + 1; //months from 1-12
+var day = dateObj.getUTCDate();
+var year = dateObj.getUTCFullYear();
+var hours = dateObj.getUTCHours();
+var minutes = dateObj.getUTCMinutes();
+var seconds = dateObj.getUTCSeconds();
+        
+var newdate = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+alert(new Date().getTime())
+alert(newdate)
+    }
+    },
+    watch:{
+      searchQuery(){
+        ///this.time()
       }
     }
   };

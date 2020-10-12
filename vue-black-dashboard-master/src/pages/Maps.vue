@@ -1,11 +1,38 @@
 <template>
-    <card type="plain" title="Google Maps">
-      <div id="map" class="map">
-      </div>
+    <card type="plain" title="Google Maps VUe">
+      <GmapMap
+                  :center="{lat: 15.144861, lng:  102.134552}"
+                  :zoom="6"
+                  style="width: 100%; height: 80vh"
+                  :options="options"
+          >
+            <GmapMarker
+                     :key="index"
+                    v-for="(m, index) in markers"
+                   :position="m.position"
+                    
+                    
+
+            />
+          </GmapMap>
     </card>
 </template>
 <script>
 export default {
+  data(){
+    return{
+       markers: [
+        {
+         position:
+           {lat: 15.043412, lng: 103.030462}
+           
+        },
+        {
+          position:
+          {lat:15.201071,lng: 101.155608}
+        }],
+    }
+  },
   mounted() {
     let myLatlng = new window.google.maps.LatLng(40.748817, -73.985428);
     let mapOptions = {
