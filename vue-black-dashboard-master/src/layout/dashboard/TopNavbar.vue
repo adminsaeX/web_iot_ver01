@@ -13,7 +13,7 @@
             <span class="navbar-toggler-bar bar3"></span>
           </button>
         </div>
-        <a class="navbar-brand" href="#pablo">{{routeName}}</a>
+        <a class="navbar-brand" href="#pablo"><img src="http://www.verifyth.com/IoT_img/sys01_logo_2.png"></a>
       </div>
       <button class="navbar-toggler" type="button"
               @click="toggleMenu"
