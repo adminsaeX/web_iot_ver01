@@ -4,44 +4,12 @@
     <div class="row">
       <div class="col-12">
         <card type="chart">
-          <template slot="header">
-            <div class="row">
-              <div class="col-sm-6" :class="isRTL ? 'text-right' : 'text-left'">
-                <h5 class="card-category">{{$t('dashboard.totalShipments')}}</h5>
-                <h2 class="card-title">{{$t('dashboard.performance')}}</h2>
-              </div>
-              <div class="col-sm-6">
-                <div class="btn-group btn-group-toggle"
-                     :class="isRTL ? 'float-left' : 'float-right'"
-                     data-toggle="buttons">
-                  <label v-for="(option, index) in bigLineChartCategories"
-                         :key="option"
-                         class="btn btn-sm btn-primary btn-simple"
-                         :class="{active: bigLineChart.activeIndex === index}"
-                         :id="index">
-                    <input type="radio"
-                           @click="initBigChart(index)"
-                           name="options" autocomplete="off"
-                           :checked="bigLineChart.activeIndex === index">
-                    {{option}}
-                  </label>
-                </div>
-              </div>
-            </div>
-          </template>
-          <div class="chart-area">
-            <line-chart style="height: 100%"
-                        ref="bigChart"
-                        chart-id="big-line-chart"
-                        :chart-data="bigLineChart.chartData"
-                        :gradient-colors="bigLineChart.gradientColors"
-                        :gradient-stops="bigLineChart.gradientStops"
-                        :extra-options="bigLineChart.extraOptions">
-            </line-chart>
-          </div>
+          <img src="http://www.verifyth.com/IoT_img/sys01_2.png">
         </card>
       </div>
     </div>
+
+
     <div class="row">
       <div class="col-lg-4" :class="{'text-right': isRTL}">
         <card type="chart">
@@ -60,6 +28,7 @@
           </div>
         </card>
       </div>
+
       <div class="col-lg-4" :class="{'text-right': isRTL}">
         <card type="chart">
           <template slot="header">
@@ -76,54 +45,32 @@
           </div>
         </card>
       </div>
+
       <div class="col-lg-4" :class="{'text-right': isRTL}">
-        <card type="chart">
-          <template slot="header">
-            <h5 class="card-category">{{$t('dashboard.completedTasks')}}</h5>
-            <h3 class="card-title"><i class="tim-icons icon-send text-success "></i> 12,100K</h3>
-          </template>
-          <div class="chart-area">
-            <line-chart style="height: 100%"
-                        chart-id="green-line-chart"
-                        :chart-data="greenLineChart.chartData"
-                        :gradient-stops="greenLineChart.gradientStops"
-                        :extra-options="greenLineChart.extraOptions">
-            </line-chart>
-          </div>
-        </card>
+      
+          <card>
+        <h4 slot="header">Notifications states</h4>
+        <base-alert type="primary" dismissible>
+          <span><b> Primary - </b> This is a regular notification made with ".alert-primary"</span>
+        </base-alert>
+        <base-alert type="info" dismissible>
+          <span><b> Info - </b> This is a regular notification made with ".alert-info"</span>
+        </base-alert>
+        <base-alert type="success" dismissible>
+          <span><b> Success - </b> This is a regular notification made with ".alert-success"</span>
+        </base-alert>
+        <base-alert type="warning" dismissible>
+          <span><b> Warning - </b> This is a regular notification made with ".alert-warning"</span>
+        </base-alert>
+        <base-alert type="danger" dismissible>
+          <span><b> Danger - </b> This is a regular notification made with ".alert-danger"</span>
+        </base-alert>
+      </card>
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-6 col-md-12">
-        <card type="tasks" :header-classes="{'text-right': isRTL}">
-          <template slot="header">
-            <h6 class="title d-inline">{{$t('dashboard.tasks', {count: 5})}}</h6>
-            <p class="card-category d-inline">{{$t('dashboard.today')}}</p>
-            <base-dropdown menu-on-right=""
-                           tag="div"
-                           title-classes="btn btn-link btn-icon"
-                           aria-label="Settings menu"
-                           :class="{'float-left': isRTL}">
-              <i slot="title" class="tim-icons icon-settings-gear-63"></i>
-              <a class="dropdown-item" href="#pablo">{{$t('dashboard.dropdown.action')}}</a>
-              <a class="dropdown-item" href="#pablo">{{$t('dashboard.dropdown.anotherAction')}}</a>
-              <a class="dropdown-item" href="#pablo">{{$t('dashboard.dropdown.somethingElse')}}</a>
-            </base-dropdown>
-          </template>
-          <div class="table-full-width table-responsive">
-            <task-list></task-list>
-          </div>
-        </card>
-      </div>
-      <div class="col-lg-6 col-md-12">
-        <card class="card" :header-classes="{'text-right': isRTL}">
-          <h4 slot="header" class="card-title">{{$t('dashboard.simpleTable')}}</h4>
-          <div class="table-responsive">
-            <user-table></user-table>
-          </div>
-        </card>
-      </div>
-    </div>
+
+
+
   </div>
 </template>
 <script>
@@ -133,13 +80,16 @@
   import TaskList from './Dashboard/TaskList';
   import UserTable from './Dashboard/UserTable';
   import config from '@/config';
+  import NotificationTemplate from './Notifications/NotificationTemplate';
+  import { BaseAlert } from '@/components';
 
   export default {
     components: {
       LineChart,
       BarChart,
       TaskList,
-      UserTable
+      UserTable,
+      BaseAlert
     },
     data() {
       return {
@@ -149,6 +99,8 @@
             [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
             [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130]
           ],
+          type: ["", "info", "success", "warning", "danger"],
+        
           activeIndex: 0,
           chartData: {
             datasets: [{ }],
@@ -278,5 +230,7 @@
     }
   };
 </script>
+
+
 <style>
 </style>
